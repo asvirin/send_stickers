@@ -19,7 +19,7 @@ def echo_text(bot, update):
         
 def echo_photo(bot, update):
     chat_id = update.message.chat_id
-    sticker_or_text = random.randint(0, 1)
+    sticker_or_text = random.randint(0, 2)
     update.message.reply_text(sticker_or_text)
     if sticker_or_text == 0:
         bot_answer_number = random.randint(0, len(list(list_answers)))
