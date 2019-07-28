@@ -43,8 +43,8 @@ def start(bot, update):
 
 if __name__ == '__main__': 
     telegram_token = os.environ['TELEGRAM_TOKEN']
-    list_answers = os.environ['LIST_ANSWERS']
-    list_stickers = os.environ['LIST_STICKERS']
+    list_answers = list(os.environ['LIST_ANSWERS'])
+    list_stickers = list(os.environ['LIST_STICKERS'])
     updater = Updater(telegram_token)
     
     try:
