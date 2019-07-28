@@ -22,12 +22,12 @@ def echo_photo(bot, update):
     sticker_or_text = random.randint(0, 2)
     update.message.reply_text(sticker_or_text)
     if sticker_or_text == 0:
-        bot_answer_number = random.randint(0, len(list(list_answers)))
+        bot_answer_number = random.randint(0, len(list_answers))
         update.message.reply_text(bot_answer_number)
         bot_answer = list_answers[bot_answer_number]
         update.message.reply_text(bot_answer)
     else:
-        bot_answer_number = random.randint(0, len(list(list_stickers)))
+        bot_answer_number = random.randint(0, len(list_stickers))
         update.message.reply_text(bot_answer_number)
         bot_answer = list_stickers[bot_answer_number]
         
@@ -39,7 +39,7 @@ def start(bot, update):
 
 if __name__ == '__main__': 
     telegram_token = os.environ['TELEGRAM_TOKEN']
-    list_answers = list(os.environ['LIST_ANSWERS'])
+    list_answers = (os.environ['LIST_ANSWERS']).split(';')
     list_stickers = list(os.environ['LIST_STICKERS'])
     updater = Updater(telegram_token)
     
