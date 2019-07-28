@@ -24,7 +24,7 @@ def echo_photo(bot, update):
         bot_answer_number = random.randint(0, len(list(list_answers)))
         bot_answer = list_answers[bot_answer_number]
         update.message.reply_text(bot_answer)
-     else:
+    else:
         bot_answer_number = random.randint(0, len(list(list_stickers)))
         bot_answer = list_stickers[bot_answer_number]
         bot.sendSticker(chat_id = chat_id, sticker = bot_answer)
