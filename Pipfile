@@ -10,10 +10,6 @@ name = "pypi"
 telegram = "*"
 python-telegram-bot = "*"
 
-random = "*"
-logging = "*"
-os = "*"
-
 [requires]
 
 python_version = "3.7.3"
