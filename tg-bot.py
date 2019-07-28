@@ -4,12 +4,6 @@ import random
 import os
 import logging
 
-LIST_ANSWERS = os.environ['LIST_ANSWERS']
-LIST_STICKERS = os.environ['LIST_STICKERS']
-
-global LIST_ANSWERS
-global LIST_STICKERS
-
 class MyLogsHandler(logging.Handler):
     def emit(self, record):
         telegram_bot_information_token = os.environ['TELEGRAM_BOT_INFORMATION_TOKEN']
@@ -31,12 +25,12 @@ def echo_photo(bot, update):
     sticker_or_text = random.randint(0, 1)
     try:
         if sticker_or_text == 0:
-            bot_answer_number = random.randint(0, len(LIST_ANSWERS))
-            bot_answer = LIST_ANSWERS[bot_answer_number]
+            bot_answer_number = random.randint(0, len(list_answers))
+            bot_answer = list_answers[bot_answer_number]
             update.message.reply_text(bot_answer)
         else:
-            bot_answer_number = random.randint(0, len(LIST_STICKERS))
-            bot_answer = LIST_STICKERS[bot_answer_number]
+            bot_answer_number = random.randint(0, len(list_stickers))
+            bot_answer = list_stickers[bot_answer_number]
             bot.sendSticker(chat_id = chat_id, sticker = bot_answer)
     except Exception as error:
         raise MyLogsHandler(error)
@@ -49,6 +43,8 @@ def start(bot, update):
 
 if __name__ == '__main__': 
     telegram_token = os.environ['TELEGRAM_TOKEN']
+    list_answers = os.environ['LIST_ANSWERS']
+    list_stickers = os.environ['LIST_STICKERS']
     updater = Updater(telegram_token)
     
     try:
