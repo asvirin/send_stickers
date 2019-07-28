@@ -13,51 +13,38 @@ class MyLogsHandler(logging.Handler):
         bot_error.send_message(chat_id=chat_id_telegram_information, text=log_entry)
 
 def echo_text(bot, update):
-    try:
-        chat_id = update.message.chat_id
-        bot_answer = os.environ['STANDART_TEXT_PHRASE']
-        update.message.reply_text(bot_answer)
-    except Exception as error:
-        raise MyLogsHandler(error)
+    chat_id = update.message.chat_id
+    bot_answer = os.environ['STANDART_TEXT_PHRASE']
+    update.message.reply_text(bot_answer)
         
 def echo_photo(bot, update):
     chat_id = update.message.chat_id
     sticker_or_text = random.randint(0, 1)
-    try:
-        if sticker_or_text == 0:
-            bot_answer_number = random.randint(0, len(list_answers))
-            bot_answer = list_answers[bot_answer_number]
-            update.message.reply_text(bot_answer)
-        else:
-            bot_answer_number = random.randint(0, len(list_stickers))
-            bot_answer = list_stickers[bot_answer_number]
-            bot.sendSticker(chat_id = chat_id, sticker = bot_answer)
-    except Exception as error:
-        raise MyLogsHandler(error)
+    if sticker_or_text == 0:
+        bot_answer_number = random.randint(0, len(list(list_answers)))
+        bot_answer = list_answers[bot_answer_number]
+        update.message.reply_text(bot_answer)
+     else:
+        bot_answer_number = random.randint(0, len(list(list_stickers)))
+        bot_answer = list_stickers[bot_answer_number]
+        bot.sendSticker(chat_id = chat_id, sticker = bot_answer)
     
 def start(bot, update):
-    try:
-        update.message.reply_text(os.environ['START_PHRSE'])
-    except Exception as error:
-        raise MyLogsHandler(error)
+    update.message.reply_text(os.environ['START_PHRSE'])
 
 if __name__ == '__main__': 
     telegram_token = os.environ['TELEGRAM_TOKEN']
-    list_answers = list(os.environ['LIST_ANSWERS'])
-    list_stickers = list(os.environ['LIST_STICKERS'])
+    list_answers = os.environ['LIST_ANSWERS']
+    list_stickers = os.environ['LIST_STICKERS']
     updater = Updater(telegram_token)
     
-    try:
-        dp = updater.dispatcher
-        dp.add_handler(CommandHandler("start", start))
+    dp = updater.dispatcher
+    dp.add_handler(CommandHandler("start", start))
 
-        echo_handler = MessageHandler(Filters.text, echo_text)
-        picture_handler = MessageHandler(Filters.video | Filters.photo | Filters.document | Filters.forwarded, echo_photo)
-        dp.add_handler(echo_handler)
-        dp.add_handler(picture_handler)
+    echo_handler = MessageHandler(Filters.text, echo_text)
+    picture_handler = MessageHandler(Filters.video | Filters.photo | Filters.document | Filters.forwarded, echo_photo)
+    dp.add_handler(echo_handler)
+    dp.add_handler(picture_handler)
 
-        updater.start_polling()
-        updater.idle()
-        
-    except Exception as error:
-        raise MyLogsHandler(error)
+    updater.start_polling()
+    updater.idle()
