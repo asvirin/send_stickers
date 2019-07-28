@@ -5,7 +5,7 @@ import os
 import logging
 
 LIST_ANSWERS = os.environ['LIST_ANSWERS']
-LIST_STICKERS = os.environ['STICKERS']
+LIST_STICKERS = os.environ['LIST_STICKERS']
 
 class MyLogsHandler(logging.Handler):
     def emit(self, record):
