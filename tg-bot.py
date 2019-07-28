@@ -33,7 +33,7 @@ def echo_photo(bot, update):
         bot.sendSticker(chat_id = chat_id, sticker = bot_answer)
     
 def start(bot, update):
-    update.message.reply_text(os.environ['START_PHRSE'])
+    update.message.reply_text(os.environ['START_PHRASE'])
 
 if __name__ == '__main__': 
     telegram_token = os.environ['TELEGRAM_TOKEN']
