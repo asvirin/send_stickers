@@ -30,12 +30,13 @@ def echo_photo(bot, update):
         bot.sendSticker(chat_id = chat_id, sticker = bot_answer)
     
 def start(bot, update):
-    update.message.reply_text(os.environ['START_PHARSE'])
+    text = os.environ['START_PHARSE']
+    update.message.reply_text(text)
 
 if __name__ == '__main__': 
     telegram_token = os.environ['TELEGRAM_TOKEN']
-    list_answers = os.environ['LIST_ANSWERS']
-    list_stickers = os.environ['LIST_STICKERS']
+    list_answers = list(os.environ['LIST_ANSWERS'])
+    list_stickers = list(os.environ['LIST_STICKERS'])
     updater = Updater(telegram_token)
     
     dp = updater.dispatcher
